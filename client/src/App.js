@@ -1,19 +1,43 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
+import { Route, BrowserRouter } from 'react-router-dom';
+import * as Routes from './constants/Routes';
+
 import "./App.css";
+import Home from './components/Home';
+import SignUp from './componenets/SignUp';
+import SignIn from './componenets/SignIn';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authUser: null,
+      currentUser: {}
+    }
+
+  };
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <BrowserRouter>
+        <Route
+          exact path={Routes.home}
+          render={() =>
+            <Home />}
+        />
+        <Route
+          path={Routes.signin}
+          render={() =>
+            <SignIn />}
+        />
+        <Route
+          path={Routes.signup}
+          render={() =>
+            <SignUp />}
+        />
+      </BrowserRouter>
     );
   }
 }
