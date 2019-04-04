@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import * as Routes from './constants/Routes';
 
 import "./App.css";
 import Home from './components/Home';
-import SignUp from './componenets/SignUp';
-import SignIn from './componenets/SignIn';
+import NotFound from './components/404';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 class App extends Component {
   constructor(props) {
@@ -22,21 +22,29 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Route
-          exact path={Routes.home}
-          render={() =>
-            <Home />}
-        />
-        <Route
-          path={Routes.signin}
-          render={() =>
-            <SignIn />}
-        />
-        <Route
-          path={Routes.signup}
-          render={() =>
-            <SignUp />}
-        />
+        <Switch>
+          <Route
+            exact
+            path={Routes.home}
+            render={() =>
+              <Home />}
+          />
+          <Route
+            path={Routes.signin}
+            render={() =>
+              <SignIn />}
+          />
+          <Route
+            path={Routes.signup}
+            render={() =>
+              <SignUp />}
+          />
+          <Route
+            path='/*'
+            render={() =>
+              <NotFound />}
+          />
+        </Switch>
       </BrowserRouter>
     );
   }

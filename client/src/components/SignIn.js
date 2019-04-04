@@ -19,21 +19,22 @@ class SignIn extends Component {
         })
     }
 
-    handleSubmit = event => {
-        event.preventDefault()
+    // handleSubmit = event => {
+    //     event.preventDefault()
 
-        const { email, password } = this.state;
+    //     const { email, password } = this.state;
 
-        this.props.firebase
-            .doSignInWithEmailAndPassword(email, password)
-            .then(async () => {
-                this.setState({ ...initialState });
-                this.props.history.push(Routes.home);
-            })
-            .catch(error => {
-                this.setState({ error });
-            });
-    }
+    //     this.props.firebase
+    //         .doSignInWithEmailAndPassword(email, password)
+    //         .then(async () => {
+    //             this.setState({ ...initialState });
+    //             this.props.history.push(Routes.home);
+    //         })
+    //         .catch(error => {
+    //             this.setState({ error });
+    //         });
+    // };
+
     render() {
         const { email, password, error } = this.state;
 
@@ -47,11 +48,10 @@ class SignIn extends Component {
 
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label style={labelStyle} >
+                        <Label>
                             Email:
                         </Label>
                         <Input
-                            style={inputStyle}
                             type='text'
                             name='email'
                             placeholder='email'
@@ -60,11 +60,10 @@ class SignIn extends Component {
                         />
                     </FormGroup>
                     <FormGroup>
-                        <Label style={labelStyle}>
+                        <Label>
                             Password:
                         </Label>
                         <Input
-                            style={inputStyle}
                             placeholder='password'
                             type='password'
                             name='password'

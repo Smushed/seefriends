@@ -9,6 +9,7 @@ const initialState = {
     email: '',
     firstname: '',
     lastname: '',
+    zip: '',
     redirectTo: null,
     error: null,
     emailValid: false,
@@ -23,31 +24,31 @@ class SignUp extends Component {
         this.state = { ...initialState };
     }
 
-    handleSubmit = async event => {
-        event.preventDefault();
+    // handleSubmit = async event => {
+    //     event.preventDefault();
 
-        //Checks if all the input fields are valid
-        //If not the validation messages are shown and no user is sent to sign up
-        if (this.checkValidInput()) {
-            const { username, email, password, firstname, lastname } = this.state;
+    //     //Checks if all the input fields are valid
+    //     //If not the validation messages are shown and no user is sent to sign up
+    //     if (this.checkValidInput()) {
+    //         const { username, email, password, firstname, lastname } = this.state;
 
-            const dbResponse = await axios.post(`/api/newuser`, { username, email, firstname, lastname });
+    //         const dbResponse = await axios.post(`/api/newuser`, { username, email, firstname, lastname });
 
-            if (dbResponse.status === 200) {
-                return this.props.firebase
-                    .doCreateUserWithEmailAndPassword(email, password)
-                    .then(authUser => {
-                        //The User has been successfully authenticated, clear this component state and redirect them to the home page
-                        this.setState({ ...initialState });
-                        this.props.history.push(Routes.home);
-                    })
-                    .catch(error => {
-                        console.log(error)
-                        this.setState({ error });
-                    });
-            };
-        };
-    };
+    //         if (dbResponse.status === 200) {
+    //             return this.props.firebase
+    //                 .doCreateUserWithEmailAndPassword(email, password)
+    //                 .then(authUser => {
+    //                     //The User has been successfully authenticated, clear this component state and redirect them to the home page
+    //                     this.setState({ ...initialState });
+    //                     this.props.history.push(Routes.home);
+    //                 })
+    //                 .catch(error => {
+    //                     console.log(error)
+    //                     this.setState({ error });
+    //                 });
+    //         };
+    //     };
+    // };
 
     handleChange = event => {
         //Breaking this out due to the input validation
@@ -59,6 +60,7 @@ class SignUp extends Component {
 
     };
 
+    // TODO Add Zip Validation
     checkValidInput = () => {
         let invalidInputs = 0;
         let invalidMessages = [];
@@ -131,11 +133,10 @@ class SignUp extends Component {
 
                 <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
-                        <Label style={labelStyle}>
+                        <Label>
                             Email
                         </Label>
                         <Input
-                            style={inputStyle}
                             type='text'
                             id='email'
                             name='email'
@@ -146,17 +147,16 @@ class SignUp extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label style={labelStyle}>
+                        <Label>
                             Password
                                 <br />
                         </Label>
-                        <div style={labelDescription}>
+                        <div>
                             <strong>
                                 (Must be at least 6 characters with no spaces)
                             </strong>
                         </div>
                         <Input
-                            style={inputStyle}
                             placeholder='Password'
                             type='password'
                             name='password'
@@ -166,11 +166,10 @@ class SignUp extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label style={labelStyle}>
+                        <Label>
                             Confirm Password
                         </Label>
                         <Input
-                            style={inputStyle}
                             placeholder='Confirm Password'
                             type='password'
                             name='confirmPassword'
@@ -180,17 +179,16 @@ class SignUp extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label style={labelStyle}>
+                        <Label>
                             Username
                             <br />
                         </Label>
-                        <div style={labelDescription}>
+                        <div>
                             <strong>
                                 (Must be between 3 & 16 characters, no special characters & no spaces)
                             </strong>
                         </div>
                         <Input
-                            style={inputStyle}
                             placeholder='ex. JaneDoe14'
                             type='username'
                             name='username'
@@ -200,11 +198,10 @@ class SignUp extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label style={labelStyle}>
+                        <Label>
                             First Name:
                         </Label>
                         <Input
-                            style={inputStyle}
                             placeholder='ex. Jane'
                             type='firstname'
                             name='firstname'
@@ -214,15 +211,27 @@ class SignUp extends Component {
                     </FormGroup>
 
                     <FormGroup>
-                        <Label style={labelStyle}>
+                        <Label>
                             Last Name:
                         </Label>
                         <Input
-                            style={inputStyle}
                             placeholder='ex. Doe'
                             type='lastname'
                             name='lastname'
                             value={this.state.lastname}
+                            onChange={this.handleChange}
+                        />
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Label>
+                            Zip Code:
+                        </Label>
+                        <Input
+                            placeholder='ex. 60661'
+                            type='zip'
+                            name='zip'
+                            value={this.state.zip}
                             onChange={this.handleChange}
                         />
                     </FormGroup>
