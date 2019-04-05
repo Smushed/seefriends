@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import * as Routes from './constants/Routes';
 
-import "./App.css";
+import './App.css';
 import Home from './components/Home';
 import NotFound from './components/404';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
+
 
 class App extends Component {
   constructor(props) {

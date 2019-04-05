@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
+import NavBar from './NavBar';
+
 const initialState = {
     username: '',
     password: '',
@@ -246,6 +248,8 @@ class SignUp extends Component {
                         </Button>
                     </FormGroup>
                 </Form>
+
+                <NavBar />
             </div >
         )
     };

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
+import NavBar from './NavBar';
+
 const initialState = {
     email: '',
     password: '',
@@ -81,6 +83,7 @@ class SignIn extends Component {
                         </Button>
                     </FormGroup>
                 </Form>
+                <NavBar />
             </div >
         );
     };
